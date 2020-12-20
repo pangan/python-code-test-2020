@@ -1,7 +1,7 @@
 Python Code Test 2020
 =====================
 
-This package contains of a Flask application which serves _Game of Thrones_ episodes
+This package contains a Flask application which serves _Game of Thrones_ episodes
 information.
 
 ## How to run
@@ -17,26 +17,26 @@ Tt runs two containers:
 * got: Flask application
 * got_db: mySQL database
 
-First time the service is running, it creates database and tables automatically.
+The first time the service is running, it creates a database and tables automatically.
 It takes time the database be ready and be accessible. please check the log messages.
 
-if database is not ready it will show below message:
+if the database is not ready it will show below message:
 
 `Could not connect to database! trying again in 10 seconds!``
 
-it tries automatically to connect database until can make  a successfull connection
-after that it fetches data from _OMDB_ and after fetching data all of episodes it shows below
+it tries automatically to connect database until can make  a successful connection
+after that, it fetches data from _OMDB_ and after fetching data all of the episodes it shows below
 message:
 
 ``Server is ready now!``
 
-it means server is ready now and can reach the endpoints on the localhost port 80.
+it means the server is ready now and can reach the endpoints on the localhost port 80.
 
 ## Tests
 
 This package has below tests:
 
-1. Unit tests : 100% coverage
+1. Unit tests: 100% coverage
 2. Flake8
 3. Black: Formatting 
 4. typing
@@ -70,7 +70,7 @@ _mySQL_ is used for database and all of its data will be store on the host in
 
     Returns information of an episode
 
-    example : `http://localhost/v1/2` 
+    example: `http://localhost/v1/2` 
 
 *  GET `/v1/high_rate`
 
