@@ -1,4 +1,11 @@
 # -*- coding: utf-8 -*-
+"""
+This module imports data from OMDB
+
+.. moduleauthor:: Amir Mofakhar <amir@mofakhar.info>
+
+Python Version: 3.7
+"""
 import requests
 import logging
 from datetime import datetime

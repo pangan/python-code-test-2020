@@ -202,8 +202,11 @@ class CommentsTestCase(BaseTestCase):
 
     def test_update_comment_with_invalid_payload_returns_400(self):
         self.insert_sample_comment()
-        response = self.app.put("/v1/comment/1")
-        self.assertEqual(response.status_code, 400)
+        invalid_payloads = [None, {}, {"foo": "bar"}]
+
+        for payload in invalid_payloads:
+            response = self.app.put("/v1/comment/1", json=payload)
+            self.assertEqual(response.status_code, 400)
 
     def test_update_comment_with_invalid_id_returns_400(self):
         self.insert_sample_comment()

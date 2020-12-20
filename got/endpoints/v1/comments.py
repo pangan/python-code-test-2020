@@ -14,8 +14,8 @@ from flask import Blueprint, request
 
 from got.models.comments import Comments
 from got.models.got import GOT
-
 from got.database import db
+from got.utils.validator import validate_put_comment_payload
 
 
 bp = Blueprint("comments", __name__)
@@ -92,6 +92,7 @@ def put_comment(comment_id):
 
     try:
         content = request.get_json()
+        validate_put_comment_payload(content)
         body = content.get("body")
         author = content.get("author")
         episode_id = content.get("episode_id")
