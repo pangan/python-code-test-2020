@@ -1,14 +1,44 @@
 version: "3.5"
 services:
   python-code-test:
+    build: .
     image: ostmodern/python-code-test:latest
     links:
       - database
+    command:
+      - /usr/local/bin/gunicorn -b $$LISTEN_HOST:$$LISTEN_PORT --reload -w 1 "got.app:create_app()"
+        -c /srv/python-code-test/got/gunicorn.py --access-logfile=- --error-logfile=- --log-file=-
+    entrypoint:
+      - /bin/sh
+      - -c
+    volumes:
+      - ./got:/srv/python-code-test/got/
+    environment:
+      - LISTEN_PORT=5050
+      - LISTEN_HOST=0.0.0.0
+      - DB_NAME=got
+      - DB_USER=ostmodern
+      - DB_PASSWORD=5@ma3&FX
+      - DB_HOST=got_db
+      - OMDB_KEY=c97f0e95
+      - OMDB_URL=http://www.omdbapi.com/
+      - LOG_LEVEL=INFO
+    depends_on:
+      - database
+    ports:
+      - 80:5050
+    container_name: got
 
-  # sample NoSQL db
   database:
-    image: amazon/dynamodb-local
+    image: mysql:5.6
+    container_name: got_db
+    environment:
+      - MYSQL_USER=ostmodern
+      - MYSQL_PASSWORD=5@ma3&FX
+      - MYSQL_DATABASE=got
+      - MYSQL_RANDOM_ROOT_PASSWORD=yes
+    ports:
+      - 3306:3306
+    volumes:
+      - ./data/mysql:/var/lib/mysql
 
-  # sample RDBMS
-  # database:
-  #  image: postgres

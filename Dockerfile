@@ -8,5 +8,6 @@ COPY requirements.txt .
 # Install pip dependencies in the same layer
 RUN apk add --no-cache  \
     bash build-base gcc && \
+    pip install --upgrade pip && \
     pip install --no-cache-dir pip-tools==5.2.1 && \
     pip install --no-cache-dir -r requirements.txt
